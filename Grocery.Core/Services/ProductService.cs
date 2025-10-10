@@ -20,22 +20,39 @@ namespace Grocery.Core.Services
 
         public Product Add(Product item)
         {
+            // (Buiten scope UC14 – laat NotImplemented of implementeer later)
             throw new NotImplementedException();
         }
 
         public Product? Delete(Product item)
         {
+            // (Buiten scope UC14)
             throw new NotImplementedException();
         }
 
         public Product? Get(int id)
         {
-            throw new NotImplementedException();
+            // Gebruik repository i.p.v. NotImplemented
+            return _productRepository.Get(id);
         }
 
         public Product? Update(Product item)
         {
             return _productRepository.Update(item);
+        }
+
+        /// <summary>
+        /// UC14 – Prijs toevoegen/aanpassen voor bestaand product.
+        /// </summary>
+        public Product AddPrice(int productId, decimal newPrice)
+        {
+            var product = _productRepository.Get(productId);
+            if (product is null)
+                throw new InvalidOperationException("Product niet gevonden.");
+
+            product.UpdatePrice(newPrice);
+            _productRepository.Update(product);
+            return product;
         }
     }
 }
