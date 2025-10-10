@@ -7,6 +7,8 @@ using Grocery.Core.Interfaces.Repositories;
 using Grocery.Core.Data.Repositories;
 using CommunityToolkit.Maui;
 
+
+
 namespace Grocery.App
 {
     public static class MauiProgram
@@ -33,12 +35,22 @@ namespace Grocery.App
             builder.Services.AddSingleton<IClientService, ClientService>();
             builder.Services.AddSingleton<IFileSaverService, FileSaverService>();
             builder.Services.AddSingleton<IBoughtProductsService, BoughtProductsService>();
+            builder.Services.AddSingleton<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddSingleton<IProductCategoryRepository, ProductCategoryRepository>();
 
             builder.Services.AddSingleton<IGroceryListRepository, GroceryListRepository>();
             builder.Services.AddSingleton<IGroceryListItemsRepository, GroceryListItemsRepository>();
             builder.Services.AddSingleton<IProductRepository, ProductRepository>();
             builder.Services.AddSingleton<IClientRepository, ClientRepository>();
             builder.Services.AddSingleton<GlobalViewModel>();
+            builder.Services.AddSingleton<ICategoryService, CategoryService>();
+            builder.Services.AddSingleton<IProductCategoryService, ProductCategoryService>();
+            builder.Services.AddTransient<CategoriesViewModel>();
+            builder.Services.AddTransient<ProductCategoriesViewModel>();
+            builder.Services.AddTransient<CategoriesView>();
+            builder.Services.AddTransient<ProductCategoriesView>();
+
+
 
             builder.Services.AddTransient<GroceryListsView>().AddTransient<GroceryListViewModel>();
             builder.Services.AddTransient<GroceryListItemsView>().AddTransient<GroceryListItemsViewModel>();
